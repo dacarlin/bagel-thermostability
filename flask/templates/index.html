@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>Mutant</th>
+        <th>Expression</th>
+        <th>T<sub>m</sub></th>
+        <th><em>k</em><sub>cat</sub></th>
+        <th><em>K<sub>M</sub></em></th>
+        <th><em>k</em><sub>cat</sub>/<em>K<sub>M</sub></em></th>
+        <th>Conservation</th>
+      </tr>
+    </thead>
+    <tbody>{% for idx, row in ii %}
+      <tr>
+        <td>{{ idx }}</td>
+        <td style="background-color:rgba(0,0,0,{{ row.protein_on_gel }});">{{ row.protein_on_gel }}</td>
+        <td>{{ row.tm|round(2) }}</td>
+        <td>{{ row.kcat|scale_kcat }}</td>
+        <td>{{ row.km   }}</td>
+        <td>{{ row.kcatkm }}</td>
+        <td class="bg" style="background-image:url( '/static/slices/slice_{{ row.position|int }}.png' );"></td>
+      </tr>{% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
